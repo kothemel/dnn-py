@@ -15,6 +15,12 @@ class NeuralNetwrok:
         self.y          = y
         self.output     = np.zeros(y.shape)
 
+    def __str__(self):
+        return ("Input Size: " + str(self.input.shape)+"\n"+
+              "Input  - Layer1  Weight Size: "+ str(self.weights1.shape)+"\n"+
+              "Layer1 - Layer2 Weight Size: " + str(self.weights2.shape)+"\n"+
+              "Layer2 - Output Weight Size: " + str(self.weights3.shape)+"\n")
+
     def feedforward(self):
         self.layer1 = sigmoid(np.dot(self.input,  self.weights1))
         self.layer2 = sigmoid(np.dot(self.layer1, self.weights2))
@@ -42,14 +48,6 @@ class NeuralNetwrok:
         self.weights2 += self.d_weights2
         self.weights3 += self.d_weights3
     
-    def printNN(self):
-        '''This function prints the current structure of the DNN'''
-
-        print("Input Size: " + str(self.input.shape)+"\n"+
-              "Input  - Layer1  Weight Size: "+ str(self.weights1.shape)+"\n"+
-              "Layer1 - Layer2 Weight Size: " + str(self.weights2.shape)+"\n"+
-              "Layer2 - Output Weight Size: " + str(self.weights3.shape)+"\n")
-
 if  __name__ == "__main__":
 
     # Input section
@@ -61,11 +59,11 @@ if  __name__ == "__main__":
     y = np.ones((inputN, 1))
 
     nn = NeuralNetwrok(X, y, hiddenLayerSize)
-    nn.printNN()
+
     for i in range (3000):
         nn.feedforward()
         nn.backprop()
-    print(nn.output)
+    print(nn)
 
     with open('dnn.txt', 'w+') as fileT:
         fileT.write("Input  X: "    +str(X)+"\n\n"+ 
