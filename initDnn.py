@@ -182,4 +182,8 @@ if __name__ == "__main__":
         nn = NeuralNetwork(X, y, 2, 2, nn_hdim)
         trainedNN = nn.train(num_examples)
         plot_decision_boundary(lambda x: predict(trainedNN, x))
-    plt.show()
+
+    # Save subplots in a .png file
+    if os.path.exists('dnn.png'):
+        os.remove('dnn.png')
+    plt.savefig('dnn.png', box_inched='tight')
