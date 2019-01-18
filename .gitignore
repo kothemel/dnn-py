@@ -1,2 +1,6 @@
 # ignore all txt files
 *.txt
+*.png
+.DS_STORE
+.vscode/
+__pycache__/
