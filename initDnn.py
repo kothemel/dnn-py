@@ -1,6 +1,6 @@
+import json
 import numpy as np
 import scipy as sc
-import pylab
 import os
 from sklearn import datasets, linear_model
 from matplotlib import pyplot as plt
@@ -45,17 +45,24 @@ def plot_decision_boundary(pred_func):
 
 
 def predict(model, x):
-    '''Code creadits to Wei Ji in
+    """Code creadits to Wei Ji in
     https://github.com/dennybritz/nn-from-scratch/blob/master/nn_from_scratch.py
     Predicts the output (0 or 1) for the given model.
 
-    Arguments:
-        model {class NeuralNetwork} -- Given the model of DNN as input,
-        the function can access its Weights.
+    Parameters
+    ----------
+    model : class NeuralNetwork
+    Given the model of DNN as input,
+    the function can access its Weights.
+    
+    x : ndarray
+        Neural network input
 
-    Returns:
-        integer -- The indices of the class with the higher probability.
-    '''
+    Returns
+    -------
+    integer
+    The indices of the class with the higher probability.
+    """
 
     # Forward propagation
     W1, b1, W2, b2 = model['W1'], model['b1'], model['W2'], model['b2']
@@ -70,16 +77,21 @@ def predict(model, x):
 
 
 def rand_2D(rows, cols):
-    '''Gets the number of rows and columns and creates
+    """Gets the number of rows and columns and creates
     a 2-D array of random numbers
 
-    Arguments:
-        rows {integer} -- number of rows
-        cols {integer} -- number of columns
+    Parameters
+    ----------
+    rows : integer
+        number of rows
+    cols : [type]
+        number of columns
 
-    Returns:
-        [type] -- [description]
-    '''
+    Returns
+    -------
+    numpy.darray
+        generates a 2D array with random numbers
+    """
 
     np.random.seed(0)
     return np.random.rand(rows, cols)
@@ -169,8 +181,9 @@ class NeuralNetwork:
 if __name__ == "__main__":
 
     # Input section
-    inputSize = int(input("Enter the size of training data: "))
-    X, y = generateData(inputSize)
+    with open('models/dnn_input.json') as data:
+        input_size = json.load(data)['input']
+    X, y = generateData(input_size)
     num_examples = len(X)
 
     # NN construction and training section
